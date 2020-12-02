@@ -24,14 +24,6 @@
             color: red;
         }
 
-        /* The popup form - hidden by default */
-        .form-popup {
-            display: none;
-            position: fixed;
-            right: 15px;
-            border: 3px solid #f1f1f1;
-            z-index: 9;
-        }
 
         /* Add styles to the form container */
         .form-container {
@@ -84,6 +76,18 @@
         request.setAttribute("id",id);
         request.setAttribute("name",name);
     %>
+    <c:if test="${not empty status}">
+        <div class="status">
+            <h3> ${status}</h3>
+        </div>
+    </c:if>
+    <c:if test="${not empty error}">
+        <div class="error">
+            <c:forEach var="errors" items="${error}">
+                <h3> ${errors.value}</h3>
+            </c:forEach>
+        </div>
+    </c:if>
     <form action="/updateemployee" class="form-container" method="post">
         <label><b>Department Name</b>
             <input type="hidden" id="employeeid" name="employeeid" value="${id}" required>

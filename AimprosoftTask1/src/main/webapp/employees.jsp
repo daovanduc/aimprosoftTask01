@@ -119,18 +119,20 @@
 </head>
 <body>
 <div>
-    <c:if test="${not empty status}">
-        <div class="status">
-            <h3> ${status}</h3>
-        </div>
-    </c:if>
-    <c:if test="${not empty error}">
-        <div class="error">
-            <c:forEach var="errors" items="${error}">
-                <h3> ${errors.value}</h3>
-            </c:forEach>
-        </div>
-    </c:if>
+    <c:choose>
+        <c:when test="${not empty status}">
+            <div class="status">
+                <h3> ${status}</h3>
+            </div>
+        </c:when>
+        <c:when test="${not empty error}">
+            <div class="error">
+                <c:forEach var="errors" items="${error}">
+                    <h3> ${errors.value}</h3>
+                </c:forEach>
+            </div>
+        </c:when>
+    </c:choose>
     <h2>Employee Table</h2>
     <table class="table m-0">
         <thead>
@@ -154,6 +156,7 @@
                                 </c:forEach>
                             </select>
                         </div>
+                        <br>
                         <button type="submit" class="btn">Submit</button>
                         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                     </form>
