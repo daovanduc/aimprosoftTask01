@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: VanDuc
@@ -11,62 +12,8 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        .status {
-            color: #4CAF50;
-        }
 
-        .error {
-            color: red;
-        }
-
-        /* The popup form - hidden by default */
-        .form-popup {
-            display: none;
-            position: fixed;
-            right: 15px;
-            border: 3px solid #f1f1f1;
-            z-index: 9;
-        }
-
-        /* Add styles to the form container */
-        .form-container {
-            max-width: 300px;
-            padding: 10px;
-            background-color: white;
-        }
-
-        /* Full-width input fields */
-        .form-container input {
-            width: 100%;
-            padding: 15px;
-            margin: 5px 0 22px 0;
-            border: none;
-            background: #f1f1f1;
-        }
-
-        /* Set a style for the submit/login button */
-        .form-container .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 16px 20px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        /* Add a red background color to the cancel button */
-        .form-container .cancel {
-            background-color: red;
-        }
-
-        /* Add some hover effects to buttons */
-        .form-container .btn:hover, .open-button:hover {
-            opacity: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <h2>Edit Department Page</h2>
@@ -77,6 +24,18 @@
         request.setAttribute("id",id);
         request.setAttribute("name",name);
     %>
+    <c:if test="${not empty status}">
+        <div class="status">
+            <h3> ${status}</h3>
+        </div>
+    </c:if>
+    <c:if test="${not empty error}">
+        <div class="error">
+            <c:forEach var="errors" items="${error}">
+                <h3> ${errors.value}</h3>
+            </c:forEach>
+        </div>
+    </c:if>
     <form action="/updatedepartment" class="form-container" method="post">
         <label><b>Department Name</b>
             <input type="hidden" id="departmentid" name="departmentid" value="${id}" required>
